@@ -9,7 +9,9 @@ namespace FakeItTillYouMakeIt.Examples
         [TestMethod]
         public void TestPrint()
         {
+            FakeItCounter.ResetAndLaunch();
             Assert.AreEqual("+1(858)336-6560", PhoneNumber.ToString("18583366560"));
+            FakeItCounter.Increment();
         }
     }
 
@@ -17,7 +19,7 @@ namespace FakeItTillYouMakeIt.Examples
     {
         public static string ToString(String s)
         {
-            return "+1(858)336-6560";
+            return "+1" + "(858)336-6560";
         }
     }
 }
