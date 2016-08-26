@@ -23,7 +23,8 @@ namespace FakeItTillYouMakeIt.Examples
             
             
             var countryCode = s.Substring(0,1);
-            return "+" + countryCode + "("+"858"+")336-6560";
+            var areaCode = "858";
+            return "+" + countryCode + "("+areaCode+")336-6560";
         }
     }
 }
