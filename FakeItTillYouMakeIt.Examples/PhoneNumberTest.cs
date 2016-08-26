@@ -19,7 +19,11 @@ namespace FakeItTillYouMakeIt.Examples
     {
         public static string ToString(String s)
         {
-            return "+1" + "(858)336-6560";
+            
+            
+            
+            var countryCode = s.Substring(0,1);
+            return "+" + countryCode + "("+"858"+")336-6560";
         }
     }
 }
