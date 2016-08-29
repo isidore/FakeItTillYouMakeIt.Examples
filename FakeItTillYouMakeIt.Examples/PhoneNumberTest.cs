@@ -25,8 +25,8 @@ namespace FakeItTillYouMakeIt.Examples
             var countryCode = s.Substring(0,1);
             var areaCode =s.Substring(1,3);
             var centralOfficeCode = s.Substring(4, 3);
-            var line = "6560";
-            return "+" + countryCode + "("+areaCode+")"+centralOfficeCode+"-"+line;
+            var line = s.Substring(7, 3);
+            return $"+{countryCode}({areaCode}){centralOfficeCode}-{line}";
         }
     }
 }
