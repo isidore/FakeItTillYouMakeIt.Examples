@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FakeItTillYouMakeIt.Examples
 {
@@ -24,6 +25,11 @@ namespace FakeItTillYouMakeIt.Examples
         {
             var line = new Line(0, 0, 0, 4);
             Assert.AreEqual(4, line.Length);
+        }        [TestMethod]
+        public void TestDiagonal()
+        {
+            var line = new Line(0, 0, 4, 3);
+            Assert.AreEqual(5, line.Length);
         }
     }
 
@@ -43,14 +49,14 @@ namespace FakeItTillYouMakeIt.Examples
             this.y2 = y2;
         }
 
-        public int Length
-        {
-            get
-            {
-                var x = x2 - x1;
-                var y = y2 - y1;
-                return x + y;
-            }
-        }
+public double Length
+{
+    get
+    {
+        var x = x2 - x1;
+        var y = y2 - y1;
+        return Math.Sqrt(x*x + y*y);
+    }
+}
     }
 }
