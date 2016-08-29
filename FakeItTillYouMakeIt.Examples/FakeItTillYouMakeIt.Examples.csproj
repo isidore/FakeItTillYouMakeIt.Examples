@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="FakeItCounter.cs" />
+    <Compile Include="LineTest.cs" />
     <Compile Include="PhoneNumberTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
