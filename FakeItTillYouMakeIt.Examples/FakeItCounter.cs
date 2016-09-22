@@ -2,16 +2,26 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace FakeItTillYouMakeIt.Examples
 {
     public class FakeItCounter
     {
-        public const string file = "fakeit.counter.txt";
+        public const string passFile = "fakeit.counter.pass.txt";
+        public const string failFile = "fakeit.counter.fail.txt";
 
-        public static void Increment()
+        public static void IncrementSuccess()
+        {
+            Increment(passFile);
+        }
+
+        public static void IncrementFailure()
+        {
+            Increment(failFile);
+        }
+
+        public static void Increment(string file)
         {
             long count = 0;
             if (File.Exists(file))
@@ -24,9 +34,13 @@ namespace FakeItTillYouMakeIt.Examples
 
         public static void Reset()
         {
-            if (File.Exists(file))
+            if (File.Exists(passFile))
             {
-                File.Delete(file);
+                File.Delete(passFile);
+            }
+            if (File.Exists(failFile))
+            {
+                File.Delete(failFile);
             }
         }
 
@@ -41,7 +55,8 @@ namespace FakeItTillYouMakeIt.Examples
             var java = @"C:\ProgramData\Oracle\Java\javapath\javaw.exe";
             var jar = @"C:\code\FakeItTillYouMakeIt.Examples\CounterDisplay.jar";
             Task.Factory.StartNew(
-                () => LaunchProgram(java, @"-jar "+ jar +" " + Path.GetFullPath(file)));
+                () => LaunchProgram(java,
+                    $"-jar {jar} {Path.GetFullPath(passFile)} {Path.GetFullPath(failFile)}"));
         }
 
 
@@ -49,13 +64,13 @@ namespace FakeItTillYouMakeIt.Examples
         {
             try
             {
-                Console.WriteLine("Starting: "+ program + " " + arguments);
+                Console.WriteLine("Starting: " + program + " " + arguments);
                 Process.Start(program, arguments);
             }
             catch (Win32Exception e)
             {
                 throw new Exception(
-                   String.Format("Unable to launch: {0} with arguments {1}\nError Message: {2}",
+                    String.Format("Unable to launch: {0} with arguments {1}\nError Message: {2}",
                         program,
                         arguments,
                         e.Message),
