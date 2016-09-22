@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FakeItTillYouMakeIt.Examples
 {
-    public class FakeItCounter
+    public class TestCounter
     {
         public const string passFile = "fakeit.counter.pass.txt";
         public const string failFile = "fakeit.counter.fail.txt";
@@ -75,6 +75,20 @@ namespace FakeItTillYouMakeIt.Examples
                         arguments,
                         e.Message),
                     e);
+            }
+        }
+
+        public static void Track(Action test)
+        {
+            try
+            {
+                test();
+                TestCounter.IncrementSuccess();
+            }
+            catch (Exception)
+            {
+                TestCounter.IncrementFailure();
+                throw;
             }
         }
     }
