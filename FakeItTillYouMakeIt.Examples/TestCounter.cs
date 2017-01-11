@@ -44,16 +44,14 @@ namespace FakeItTillYouMakeIt.Examples
             }
         }
 
-        public static void ResetAndLaunch()
+        public static void ResetAndLaunch(string javaPath, string counterDisplay)
         {
             Reset();
-            Launch();
+            Launch(javaPath, counterDisplay);
         }
 
-        private static void Launch()
+        public static void Launch(string java, string jar)
         {
-            var java = @"C:\ProgramData\Oracle\Java\javapath\javaw.exe";
-            var jar = @"C:\code\FakeItTillYouMakeIt.Examples\CounterDisplay.jar";
             Task.Factory.StartNew(
                 () => LaunchProgram(java,
                     $"-jar {jar} {Path.GetFullPath(passFile)} {Path.GetFullPath(failFile)}"));
